@@ -65,6 +65,9 @@ public class AuthController {
 			response.getWriter().write(new JSONObject().put("userId", optionalUser.get().getId()).put("role", optionalUser.get().getRole()).toString());
 		}
 		
+		response.addHeader("Access-Control-Expose-Headers", "Authorization");
+		response.addHeader("Access-Control-Allow-Headers", "Authorization, X-PINGOTHER, Origin, " +
+		"X-Request-With, Content-Type, Accept, X-Custom-Header");
 		response.addHeader(HEADER_STRING, TOKEN_PREFIX + jwt);
 	}
 	

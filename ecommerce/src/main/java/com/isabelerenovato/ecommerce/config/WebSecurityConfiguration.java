@@ -23,14 +23,14 @@ public class WebSecurityConfiguration {
 	
 	private final JwtRequestFilter authFilter;
 	
-	
+	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    return http
-	            .csrf().disable()
+	    		.csrf(csrf -> csrf.disable())
 	            .authorizeHttpRequests(auth -> auth
 	                .requestMatchers("/authenticate", "/sign-up", "/order/**").permitAll()
-	                .requestMatchers("/api/**").authenticated()
-	                .anyRequest().denyAll() 
+	                .requestMatchers("/api/**").authenticated().anyRequest().denyAll()
+	               
 	            )
 	            .sessionManagement(session -> session
 	                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
